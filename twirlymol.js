@@ -328,7 +328,6 @@ function twirlyMol(elemID, atoms, bonds, elements, fog){
 	surfaceIDs.push(elemID);
 	surfaces.push(surface);
   }
-  var surface = dojox.gfx.createSurface(container, w, h);
   var container_pos = dojo.coords(container, true);
   var centre = {x: w/2, y:h/2};
   var coords = Array(atoms.length);
