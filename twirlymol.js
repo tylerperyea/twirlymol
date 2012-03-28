@@ -1,4 +1,8 @@
 dojo.require("dojox.gfx");
+//I'm sure this could be done better, but these allow for redrawing on the same surface
+var surfaceIDs=new Array();	//stores the IDs where the surfaces are made
+var surfaces=new Array();	//stores the surfaces for those IDs
+
 //dojo.require("dojox.gfx.move");
 function getInternetExplorerVersion() {
 // Returns the version of Internet Explorer or a -1
@@ -311,7 +315,19 @@ function twirlyMol(elemID, atoms, bonds, elements, fog){
     w = container.getAttribute("width");
     h = container.getAttribute("height");
   }
-  
+  var surface;
+  //Look for a surface already created under this elementID
+  var surfIndex=surfaceIDs.indexOf(elemID);
+  //If there is one (>-1 case), just use it and clear it
+  //Otherwise, make a new one, and add the ID and surface to the array
+  if(surfIndex>-1){
+	surface=surfaces[surfIndex];
+	surface.clear();
+  }else{
+	surface = dojox.gfx.createSurface(container, w, h);
+	surfaceIDs.push(elemID);
+	surfaces.push(surface);
+  }
   var surface = dojox.gfx.createSurface(container, w, h);
   var container_pos = dojo.coords(container, true);
   var centre = {x: w/2, y:h/2};
