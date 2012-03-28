@@ -26,6 +26,8 @@ function switchMol() {
     MOLID=1;
   else    
     MOLID=0;
+  var sdfs = sdf.split("$$$$\n");
+  var bigmol = dojo.byId("bigmol");
   var mol = parseSD(sdfs[MOLID]);
   twirlyMol("bigmol", mol.atoms, mol.bonds, mol.elements);
 }
