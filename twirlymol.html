@@ -14,13 +14,23 @@
 <div id="bigmol" style="width:400px;height:400px;">
 </div>
 <script type="text/javascript">
+var MOLID=0;
 function mysetup() {
   var sdfs = sdf.split("$$$$\n");
   var bigmol = dojo.byId("bigmol");
   var mol = parseSD(sdfs[3]);
   twirlyMol("bigmol", mol.atoms, mol.bonds, mol.elements);
 }
+function switchMol() {
+  if(MOLID==0)
+    MOLID=1;
+  else    
+    MOLID=0;
+  var mol = parseSD(sdfs[MOLID]);
+  twirlyMol("bigmol", mol.atoms, mol.bonds, mol.elements);
+}
 dojo.addOnLoad( mysetup);
 </script></p>
+<input type="button" value="SWAP MOLE" onclick="switchMol()">
 </body>
 </html>
